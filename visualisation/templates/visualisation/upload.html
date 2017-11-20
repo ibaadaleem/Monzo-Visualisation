@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<style>
+.header{
+	height:30px
+}
+.content{
+    position:absolute;
+    top: 30px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    overflow-y:scroll;  
+}​
+</style>
+
+<head>
+  <div class="header">
+	<div style="float:left; margin-right:10px">
+	  <form action="{% url 'visualisation:home' %}">
+		<input type="submit" value="Home" />
+	  </form>
+	</div>
+
+	<div style="float:left; margin-right:10px">
+	  <form action="{% url 'visualisation:upload' %}">
+		<input type="submit" disabled value="Upload" />
+	  </form>
+	</div>
+
+	<div style="float:left; margin-right:10px">
+	  <form action="{% url 'visualisation:visuals' %}">
+		<input type="submit" value="Visuals" />
+	  </form>
+	</div>
+
+	<div style="float:left; margin-right:10px">
+	  <form action="{% url 'visualisation:analytics' %}">
+		<input type="submit" value="Analytics" />
+	  </form>
+	</div>
+
+	<div style="float:left; margin-right:10px">
+	  <form action="{% url 'visualisation:csv_data' %}">
+		<input type="submit" value="CSV Data" />
+	  </form>
+	</div>
+  </div>
+</head>
+
+<body>
+  <div class='content'>
+
+	<p>
+	<form action="{% url 'visualisation:upload' %}" method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	<input type="file" name="uploadCsvFile"/>
+	<input type="submit" class="button" value="Upload" bgcolor="black"/>
+	</form>
+	</p>
+
+	<p>
+	<form action="{% url 'visualisation:upload' %}" method="POST">
+	{% csrf_token %}
+	<input type="submit" class="button" name="deleteRecords" value="Delete contents of table"/>
+	</form>
+	</p>
+
+  </div>
+</body>

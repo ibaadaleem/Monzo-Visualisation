@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<style>
+.header{
+	height:30px
+}
+.content{
+    position:absolute;
+    top: 50px;
+    left:10px;
+    right:0px;
+    bottom:0px;
+    overflow-y:scroll;
+}
+
+body{ 
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+
+table.dataframe, .dataframe th, .dataframe td {
+    border: none;
+    border-collapse: collapse;
+    text-align:center;
+    padding-bottom: 3px;
+    padding-top:: 3px;
+    font-size: 0.9em;
+    margin-bottom: 20px;
+}
+table.dataframe{
+	width:100%;
+}
+th{
+	width:9%;
+	background-color:#9ebae5;
+	font-size: 0.9em;
+}
+tr:nth-child(odd) {
+	background-color:#d2dff4;
+}
+</style>
+
+<head>
+  <div class="header">
+	<div style="float:left; margin-right:10px">
+	  <form action="{% url 'visualisation:home' %}">
+		<input type="submit" value="Home" />
+	  </form>
+	</div>
+
+	<div style="float:left; margin-right:10px">
+	  <form action="{% url 'visualisation:upload' %}">
+		<input type="submit" value="Upload" />
+	  </form>
+	</div>
+
+	<div style="float:left; margin-right:10px">
+	  <form action="{% url 'visualisation:visuals' %}">
+		<input type="submit" value="Visuals" />
+	  </form>
+	</div>
+
+	<div style="float:left; margin-right:10px">
+	  <form action="{% url 'visualisation:analytics' %}">
+		<input type="submit" disabled value="Analytics" />
+	  </form>
+	</div>
+
+	<div style="float:left; margin-right:10px">
+	  <form action="{% url 'visualisation:csv_data' %}">
+		<input type="submit" value="CSV Data" />
+	  </form>
+	</div>
+  </div>
+</head>
+
+<body>
+  <div class="content">
+	<table>
+	  Data By Week
+	  {{ week_data_html|safe }}
+	</table>
+	
+	<table>
+	  Data By Month
+	  {{ month_data_html|safe }}
+	</table>
+  </div>
+</body>

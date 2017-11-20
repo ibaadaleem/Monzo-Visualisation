@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<style>
+.header{
+	height:30px
+}
+.content{
+    position:absolute;
+    top: 40px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    overflow-y:scroll;        
+}​
+</style>
+
+<head>
+  <div class="header">
+	<div style="float:left; margin-right:10px">
+	  <form action="{% url 'visualisation:home' %}">
+		<input type="submit" value="Home" />
+	  </form>
+	</div>
+
+	<div style="float:left; margin-right:10px">
+	  <form action="{% url 'visualisation:upload' %}">
+		<input type="submit" value="Upload" />
+	  </form>
+	</div>
+
+	<div style="float:left; margin-right:10px">
+	  <form action="{% url 'visualisation:visuals' %}">
+		<input type="submit" disabled value="Visuals" />
+	  </form>
+	</div>
+
+	<div style="float:left; margin-right:10px">
+	  <form action="{% url 'visualisation:analytics' %}">
+		<input type="submit" value="Analytics" />
+	  </form>
+	</div>
+
+	<div style="float:left; margin-right:10px">
+	  <form action="{% url 'visualisation:csv_data' %}">
+		<input type="submit" value="CSV Data" />
+	  </form>
+	</div>
+  </div>
+</head>
+
+<body>
+  <div class="content">
+  <div>
+	<form method ='GET' action="{% url 'visualisation:visuals' %}">
+	  {% for key,value in labels_dict.items %}
+		<input type='checkbox' name={{key}} id={{key}} {{value.is_checked}}>{{value.start}}
+	  {% endfor %}
+
+	<input type='submit' name="groupedData">
+	</form>
+
+	{% if barChart %}
+	<div >
+	{{ barChart|safe }}
+	</div>
+	{% endif %}
+  </div>
+  
+   <div>
+  	<form method ='GET' action="{% url 'visualisation:visuals' %}">
+		<input type='date' name="fromDate" id='fromDate' value={{date_dict.fromDate}}>From Date
+		<input type='date' name="toDate" id='toDate' value={{date_dict.toDate}}>To Date
+	<input type='submit' name="scatterPlot">
+	</form>
+	
+	{% if scatterPlot %}
+	<div >
+	{{ scatterPlot|safe }}
+	</div>
+	{% endif %}
+    </div>
+  
+  </div>
+</body>
