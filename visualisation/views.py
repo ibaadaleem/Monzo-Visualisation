@@ -271,17 +271,17 @@ def auto_upload_csv_file():
 		
 		#Work Computer path
 		if os.path.exists('C:\\Users\\ialeem\\Google Drive'):
-			google_drive_dir = 'C:\\Users\\ialeem\\Google Drive'#Change name as appropriate
+			dir = 'C:\\Users\\ialeem\\Google Drive'#Change name as appropriate
 		#add elif statements for any other computers you might want to upload from
 		
-		if os.path.exists(google_drive_dir):
+		if os.path.exists(dir):
 			file_list = []
-			for file in os.listdir(google_drive_dir):
+			for file in os.listdir(dir):
 				if file.startswith('MonzoDataExport_AllSpending') & file.endswith('.csv'):
 					file_list.append([file,datetime.strptime(file.split('_')[2],'%Y-%m-%d')])
 					
 			if file_list:
-				most_recent_file = google_drive_dir + '\\' + max(file_list, key=lambda list:list[1])[0]
+				most_recent_file = dir + '\\' + max(file_list, key=lambda list:list[1])[0]
 				
 				data = pd.read_csv(most_recent_file,parse_dates=True)
 				data['created'] = data['created'].apply(lambda x: datetime.strptime(x[:16],'%Y-%m-%d %H:%M')) #Monzo data contains milliseconds that don't play well with pandas, so strip them off			
